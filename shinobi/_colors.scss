@@ -2,28 +2,45 @@
   .text-#{$key} {
     color: $val;
   }
+  .text-hover-#{$key} {
+    &:hover {
+      color: $val;
+    }
+  }
   .bg-#{$key} {
     background-color: $val;
   }
+     
+  @if ($val != black and $val != white) {
+    // light variations
+    // can also use: @for $i from 1 to 10 instead
+    @for $i from 1 through 9 {
+      .text-#{$key}-light-#{$i} {
+        // tutorial is i * 10, which is deprecated
+        color: mix(white, $val, $i * 10%);
+      }
+      .text-hover-#{$key}-light-#{$i} {
+        &:hover{
+          color: mix(white, $val, $i * 10%);
+        }
+      }
+      .bg-#{$key}-light-#{$i} {
+        background-color: mix(white, $val, $i * 10%);
+      }
+    }
 
-  // light variations
-  // can also use: @for $i from 1 to 10 instead
-  @for $i from 1 through 9 {
-    .text-#{$key}-light-#{$i} {
-        // toturial is i * 10, which is deprecated
-      color: mix(white, $val, $i * 10%);
-    }
-    .bg-#{$key}-light-#{$i} {
-      background-color: mix(white, $val, $i * 10%);
-    }
-  }
-
-  @for $i from 1 through 9 {
-    .text-#{$key}-dark-#{$i} {
-      color: mix(black, $val, $i * 10%);
-    }
-    .bg-#{$key}-dark-#{$i} {
-      background-color: mix(black, $val, $i * 10%);
+    @for $i from 1 through 9 {
+      .text-#{$key}-dark-#{$i} {
+        color: mix(black, $val, $i * 10%);
+      }
+      .text-hover-#{$key}-dark-#{$i} {
+        &:hover {
+          color: mix(black, $val, $i * 10%);
+        }
+      }
+      .bg-#{$key}-dark-#{$i} {
+        background-color: mix(black, $val, $i * 10%);
+      }
     }
   }
 }
